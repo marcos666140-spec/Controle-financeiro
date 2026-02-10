@@ -25,9 +25,7 @@ section {
   padding: 15px;
   border-bottom: 1px solid #222;
 }
-h2 {
-  margin-top: 0;
-}
+h2 { margin-top: 0; }
 .item {
   display: flex;
   gap: 6px;
@@ -39,9 +37,7 @@ input[type="number"], input[type="text"] {
   border-radius: 4px;
   border: none;
 }
-input[type="checkbox"] {
-  transform: scale(1.2);
-}
+input[type="checkbox"] { transform: scale(1.2); }
 .total {
   padding: 15px;
   font-size: 1.3em;
@@ -63,9 +59,7 @@ button {
 .tabs button.active {
   background: #2ecc71;
 }
-.hidden {
-  display: none;
-}
+.hidden { display: none; }
 </style>
 </head>
 
@@ -79,42 +73,69 @@ button {
 </section>
 
 <div class="tabs">
-  <button class="active" onclick="mostrarAba('gastos')">Gastos</button>
-  <button onclick="mostrarAba('parcelas')">Parcelas</button>
+  <button class="active" onclick="mostrarAba(event,'gastos')">Gastos</button>
+  <button onclick="mostrarAba(event,'parcelas')">Parcelas</button>
 </div>
 
 <div id="gastos">
   <section>
     <h2>🏠 Gastos Fixos</h2>
-    <div class="item"><input id="aluguel" type="number" placeholder="Aluguel"><input id="aluguelPago" type="checkbox"></div>
-    <div class="item"><input id="agua" type="number" placeholder="Água"><input id="aguaPago" type="checkbox"></div>
-    <div class="item"><input id="luz" type="number" placeholder="Luz"><input id="luzPago" type="checkbox"></div>
-    <div class="item"><input id="internet" type="number" placeholder="Internet"><input id="internetPago" type="checkbox"></div>
+    <div class="item">
+      <input id="aluguel" class="gasto" data-pago="aluguelPago" type="number" placeholder="Aluguel">
+      <input id="aluguelPago" type="checkbox">
+    </div>
+    <div class="item">
+      <input id="agua" class="gasto" data-pago="aguaPago" type="number" placeholder="Água">
+      <input id="aguaPago" type="checkbox">
+    </div>
+    <div class="item">
+      <input id="luz" class="gasto" data-pago="luzPago" type="number" placeholder="Luz">
+      <input id="luzPago" type="checkbox">
+    </div>
+    <div class="item">
+      <input id="internet" class="gasto" data-pago="internetPago" type="number" placeholder="Internet">
+      <input id="internetPago" type="checkbox">
+    </div>
   </section>
 
   <section>
     <h2>🛒 Compras (Cartão)</h2>
-    <div class="item"><input id="cartao" type="number" placeholder="Valor"><input id="cartaoPago" type="checkbox"></div>
+    <div class="item">
+      <input id="cartao" class="gasto" data-pago="cartaoPago" type="number" placeholder="Valor">
+      <input id="cartaoPago" type="checkbox">
+    </div>
   </section>
 
   <section>
     <h2>🥖 Padaria</h2>
-    <div class="item"><input id="padaria" type="number" placeholder="Valor"><input id="padariaPago" type="checkbox"></div>
+    <div class="item">
+      <input id="padaria" class="gasto" data-pago="padariaPago" type="number" placeholder="Valor">
+      <input id="padariaPago" type="checkbox">
+    </div>
   </section>
 
   <section>
     <h2>💊 Farmácia</h2>
-    <div class="item"><input id="farmacia" type="number" placeholder="Valor"><input id="farmaciaPago" type="checkbox"></div>
+    <div class="item">
+      <input id="farmacia" class="gasto" data-pago="farmaciaPago" type="number" placeholder="Valor">
+      <input id="farmaciaPago" type="checkbox">
+    </div>
   </section>
 
   <section>
     <h2>⛽ Combustível</h2>
-    <div class="item"><input id="combustivel" type="number" placeholder="Valor"><input id="combustivelPago" type="checkbox"></div>
+    <div class="item">
+      <input id="combustivel" class="gasto" data-pago="combustivelPago" type="number" placeholder="Valor">
+      <input id="combustivelPago" type="checkbox">
+    </div>
   </section>
 
   <section>
     <h2>➕ Gastos à parte</h2>
-    <div class="item"><input id="extra" type="number" placeholder="Valor"><input id="extraPago" type="checkbox"></div>
+    <div class="item">
+      <input id="extra" class="gasto" data-pago="extraPago" type="number" placeholder="Valor">
+      <input id="extraPago" type="checkbox">
+    </div>
   </section>
 </div>
 
@@ -122,10 +143,22 @@ button {
   <section>
     <h2>📦 Parcelas</h2>
 
-    <div class="item"><input id="neon" type="number" placeholder="Neon"><input id="neonPago" type="checkbox"></div>
-    <div class="item"><input id="shopee" type="number" placeholder="Shopee"><input id="shopeePago" type="checkbox"></div>
-    <div class="item"><input id="santander" type="number" placeholder="Santander"><input id="santanderPago" type="checkbox"></div>
-    <div class="item"><input id="inter" type="number" placeholder="Inter"><input id="interPago" type="checkbox"></div>
+    <div class="item">
+      <input id="neon" class="gasto" data-pago="neonPago" type="number" placeholder="Neon">
+      <input id="neonPago" type="checkbox">
+    </div>
+    <div class="item">
+      <input id="shopee" class="gasto" data-pago="shopeePago" type="number" placeholder="Shopee">
+      <input id="shopeePago" type="checkbox">
+    </div>
+    <div class="item">
+      <input id="santander" class="gasto" data-pago="santanderPago" type="number" placeholder="Santander">
+      <input id="santanderPago" type="checkbox">
+    </div>
+    <div class="item">
+      <input id="inter" class="gasto" data-pago="interPago" type="number" placeholder="Inter">
+      <input id="interPago" type="checkbox">
+    </div>
 
     <h3>➕ Parcelas extras</h3>
     <div id="parcelasExtras"></div>
@@ -138,63 +171,72 @@ button {
 </div>
 
 <script>
-function mostrarAba(aba) {
+const STORAGE_KEY = "controleFinanceiro_v1";
+
+function mostrarAba(e, aba) {
   document.getElementById("gastos").classList.toggle("hidden", aba !== "gastos");
   document.getElementById("parcelas").classList.toggle("hidden", aba !== "parcelas");
   document.querySelectorAll(".tabs button").forEach(b => b.classList.remove("active"));
-  event.target.classList.add("active");
+  e.target.classList.add("active");
 }
 
-function calcular() {
-  let saldo = Number(saldoInicial.value || 0);
-  document.querySelectorAll("input[type='number']").forEach(i => {
-    const pago = document.getElementById(i.id + "Pago");
-    if (pago && !pago.checked) saldo -= Number(i.value || 0);
+function calcularSaldo() {
+  let saldo = parseFloat(document.getElementById("saldoInicial").value || 0);
+
+  document.querySelectorAll(".gasto").forEach(input => {
+    const valor = parseFloat(input.value || 0);
+    const pago = document.getElementById(input.dataset.pago);
+    if (pago && pago.checked) saldo -= valor;
   });
-  saldoFinal.textContent = saldo.toFixed(2);
+
+  document.getElementById("saldoFinal").innerText = saldo.toFixed(2);
 }
 
 function salvarDados() {
-  const dados = Array.from(document.querySelectorAll("input")).map(i => ({
-    id: i.id,
-    value: i.type === "checkbox" ? i.checked : i.value
-  }));
-  localStorage.setItem("controleFinanceiro", JSON.stringify(dados));
+  const dados = {};
+  document.querySelectorAll("input").forEach(i => {
+    if (!i.id) return;
+    dados[i.id] = i.type === "checkbox" ? i.checked : i.value;
+  });
+  localStorage.setItem(STORAGE_KEY, JSON.stringify(dados));
 }
 
 function carregarDados() {
-  const dados = JSON.parse(localStorage.getItem("controleFinanceiro"));
+  const dados = JSON.parse(localStorage.getItem(STORAGE_KEY));
   if (!dados) return;
-  dados.forEach(d => {
-    const el = document.getElementById(d.id);
+
+  Object.keys(dados).forEach(id => {
+    const el = document.getElementById(id);
     if (!el) return;
-    el.type === "checkbox" ? el.checked = d.value : el.value = d.value;
+    el.type === "checkbox" ? el.checked = dados[id] : el.value = dados[id];
   });
-  calcular();
 }
 
 function addParcela() {
-  const id = "extraParcela" + Date.now();
+  const id = "parcela_" + Date.now();
   const div = document.createElement("div");
   div.className = "item";
   div.innerHTML = `
-    <input id="${id}" type="number" placeholder="Nova parcela">
+    <input id="${id}" class="gasto" data-pago="${id}Pago" type="number" placeholder="Nova parcela">
     <input id="${id}Pago" type="checkbox">
   `;
-  parcelasExtras.appendChild(div);
+  document.getElementById("parcelasExtras").appendChild(div);
 }
 
 document.addEventListener("input", () => {
-  calcular();
   salvarDados();
+  calcularSaldo();
 });
 
 document.addEventListener("change", () => {
-  calcular();
   salvarDados();
+  calcularSaldo();
 });
 
-window.addEventListener("load", carregarDados);
+window.addEventListener("load", () => {
+  carregarDados();
+  calcularSaldo();
+});
 
 if ("serviceWorker" in navigator) {
   navigator.serviceWorker.register("sw.js");
